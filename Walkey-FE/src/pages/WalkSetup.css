@@ -1,0 +1,105 @@
+.walk-setup-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-size: cover;
+    transition: background 0.5s ease;
+}
+
+/* Dynamic Backgrounds based on Theme */
+.walk-setup-container.theme-nature {
+    background: var(--bg-gradient-nature);
+}
+
+.walk-setup-container.theme-silent {
+    background: var(--bg-gradient-silent);
+}
+
+.walk-setup-container.theme-sparkling {
+    background: var(--bg-gradient-sparkling);
+}
+
+.walk-setup-container.theme-cafe {
+    background: var(--bg-gradient-cafe);
+}
+
+.walk-setup-container.theme-energy {
+    background: var(--bg-gradient-energy);
+}
+
+.walk-setup-container.theme-random {
+    background: var(--bg-gradient-random);
+}
+
+.content-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+}
+
+.walk-setup-header {
+    margin-bottom: 30px;
+}
+
+.walk-setup-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.section {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.section h3 {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.find-route-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--color-primary-nature);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.find-route-btn:hover {
+    opacity: 0.9;
+}
+
+/* Theme specific button colors */
+.theme-nature .find-route-btn {
+    background: var(--color-primary-nature);
+}
+
+.theme-silent .find-route-btn {
+    background: var(--color-primary-silent);
+}
+
+.theme-sparkling .find-route-btn {
+    background: var(--color-primary-sparkling);
+}
+
+.theme-cafe .find-route-btn {
+    background: var(--color-primary-cafe);
+}
+
+.theme-energy .find-route-btn {
+    background: var(--color-primary-energy);
+}
+
+.theme-random .find-route-btn {
+    background: var(--color-primary-random);
+    color: #333;
+    /* Darker text for readability on yellow */
+}

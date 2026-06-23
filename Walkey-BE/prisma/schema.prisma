@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime   @default(now()) @db.Timestamptz(6)
+  username   String
+  avatar_url String
+  user_info  UserInfo?
+  sessions   Session[]
+
+  @@map("users")
+}
+
+model UserInfo {
+  id         String   @id @db.Uuid
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  email      String?  @unique
+  password   String
+  user       User     @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  @@map("user_infos")
+}
+
+model Theme {
+  id          Int      @id @default(autoincrement())
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  title       String?
+  description String?
+  color_code  String?
+  icon_url    String?
+  routes      Route[]
+
+  @@map("themes")
+}
+
+
+model Route {
+  id             BigInt    @id @default(autoincrement())
+  theme_id       Int
+  created_at     DateTime  @default(now()) @db.Timestamptz(6)
+  name           String
+  total_distance Int
+  estimated_time Int
+  thumbnail_url  String
+  paths          String[]      // PostgreSQL ARRAY 타입
+  detail_paths   Json?      // PostgreSQL ARRAY 타입
+  theme          Theme    @relation(fields: [theme_id], references: [id])
+  sessions       Session[]
+
+  @@map("routes")
+}
+
+model Session {
+  id              BigInt    @id @default(autoincrement())
+  created_at      DateTime  @default(now()) @db.Timestamptz(6)
+  user_id         String   @db.Uuid
+  route_id        BigInt
+  start_time      DateTime? @default(now()) @db.Timestamptz(6)
+  end_time        DateTime? @db.Timestamptz(6)
+  actual_distance Float     @default(0)
+  actual_duration Float     @default(0)
+  user            User?     @relation(fields: [user_id], references: [id])
+  route           Route    @relation(fields: [route_id], references: [id])
+
+  @@map("sessions")
+}
